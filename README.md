@@ -21,9 +21,20 @@ Setup
 Running the Server
 ------------------
 
+    cd src/github.com/clarenceb/jokes_api/server
+    go build
+    ./server
+
+    # Test server with curl:
+    curl -H "Accept: application/json" http://localhost:8080/joke
+    # => {"joke":"Chuck Norris finished World of Warcraft."}
+
 Running the Client
 ------------------
 
+    cd src/github.com/clarenceb/jokes_api/client
+    go build
+    # TODO: pending...
 
 About `jokes_api/server`
 -----------------------
@@ -58,5 +69,14 @@ Further Learning
 Credits
 -------
 
+* [The Internet Chuck Norris Database](http://www.icndb.com/api/) - for providing a free public API
+* [How I Start - Go](http://howistart.org/posts/go/1) - for a good example of setting up Go and a providing a RESTful API demo
+
 License
 -------
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Clarence Bakirtzidis
+
+(see LICENSE file for details)
