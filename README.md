@@ -66,6 +66,12 @@ Potential Improvements
 Further Learning
 ----------------
 
+* Learn more about commandline flags:
+    * http://golang.org/pkg/flag/
+    * https://gobyexample.com/command-line-flags
+* Learn more about JSON encoding and decoding:
+    * http://blog.golang.org/json-and-go
+
 Credits
 -------
 
