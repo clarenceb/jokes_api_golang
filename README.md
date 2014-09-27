@@ -12,8 +12,11 @@ The code will only use packages from the [standard library](http://golang.org/pk
 TODO:
 -----
 * Build server
-* Figure out how to write tests (yes, not doing TDD as I don't even know the syntax yet!)
 * Build client
+* Figure out how to write tests (yes, not doing TDD as I don't even know the syntax yet!)
+    * Go testing
+    * Gingko
+    * GoConvery
 
 Setup
 -----
@@ -34,7 +37,9 @@ Running the Client
 
     cd src/github.com/clarenceb/jokes_api/client
     go build
-    # TODO: pending...
+    ./client --help
+    ./client
+    # => 1: Chuck Norris finished World of Warcraft.
 
 About `jokes_api/server`
 -----------------------
@@ -66,6 +71,9 @@ Potential Improvements
 Further Learning
 ----------------
 
+* Start here: [Tour of Go](http://tour.golang.org/)
+* Quick reference to learn syntax and common usage:
+    * https://gobyexample.com/
 * Learn more about commandline flags:
     * http://golang.org/pkg/flag/
     * https://gobyexample.com/command-line-flags
