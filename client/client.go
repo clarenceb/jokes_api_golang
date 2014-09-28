@@ -1,10 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
-	"net/http"
 )
 
 func main() {
@@ -14,70 +12,17 @@ func main() {
 	var c = flag.Bool("c", false, "Fetch jokes concurrently")
 	flag.Parse()
 
+	api := jokeApi{BaseUri: "http://localhost:8080", NumRequests: *n}
+
+	var jokes []string
+
 	if *c {
-		concurrentJokes(*n)
+		jokes = api.ConcurrentJokes()
 	} else {
-		syncJokes(*n)
-	}
-}
-
-// Fetch jokes synchronously: one at a time
-func syncJokes(n int) {
-	for i := 0; i < n; i++ {
-		joke, err := joke()
-
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		fmt.Printf("%d: %s\n", i+1, joke)
-	}
-}
-
-// Fetch jokes concurrently: many at a time
-func concurrentJokes(n int) {
-	jokes := make(chan string, n)
-	errs := make(chan error, n)
-
-	for i := 0; i < n; i++ {
-		go func(i int) {
-			joke, err := joke()
-			if err != nil {
-				errs <- err
-				return
-			}
-			jokes <- fmt.Sprintf("%d: %s\n", i+1, joke)
-		}(i)
+		jokes = api.SyncJokes()
 	}
 
-	for i := 0; i < n; i++ {
-		select {
-		case joke := <-jokes:
-			fmt.Println(joke)
-		case err := <-errs:
-			fmt.Printf(err.Error())
-		}
+	for _, joke := range jokes {
+		fmt.Println(joke)
 	}
-}
-
-// Fetch a single joke from an external HTTP web service
-func joke() (string, error) {
-	resp, err := http.Get("http://localhost:8080/joke")
-
-	if err != nil {
-		fmt.Println(err)
-		return "", err
-	}
-
-	var body struct {
-		Joke string `json:"joke"`
-	}
-
-	if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
-		fmt.Println(err)
-		return "", err
-	}
-
-	return body.Joke, nil
 }

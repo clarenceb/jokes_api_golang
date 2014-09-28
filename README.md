@@ -85,7 +85,6 @@ Demonstrates:
 * HTTP RESTful API
 * JSON encoding / decoding of messages
 * Basic logging for debugging / troubleshooting
-* Packages and splitting code over multiple files
 * Error handling
 * Testing
 
@@ -98,6 +97,7 @@ Demonstrates:
 * Parsing command-line arguments
 * Making concurrent HTTP client requests (via goroutines and channels)
 * Error handling
+* Packages and splitting code over multiple files
 * Testing
 
 Potential Improvements
