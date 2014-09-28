@@ -72,6 +72,8 @@ Further Learning
 ----------------
 
 * Start here: [Tour of Go](http://tour.golang.org/)
+* Understand why Go was made and its design goals:
+    * [Go at Google: Language Design in the Service of Software Engineering](http://talks.golang.org/2012/splash.article)
 * Quick reference to learn syntax and common usage:
     * https://gobyexample.com/
 * Learn more about commandline flags:
