@@ -11,9 +11,18 @@ func main() {
 	fmt.Println("Welcome to the Jokes API client!")
 
 	var n = flag.Int("n", 1, "Number of jokes to get")
+	var c = flag.Bool("c", false, "Fetch jokes concurrently")
 	flag.Parse()
 
-	for i := 0; i < *n; i++ {
+	if *c {
+		concurrentJokes(*n)
+	} else {
+		syncJokes(*n)
+	}
+}
+
+func syncJokes(n int) {
+	for i := 0; i < n; i++ {
 		joke, err := joke()
 
 		if err != nil {
@@ -22,6 +31,31 @@ func main() {
 		}
 
 		fmt.Printf("%d: %s\n", i+1, joke)
+	}
+}
+
+func concurrentJokes(n int) {
+	jokes := make(chan string, n)
+	errs := make(chan error, n)
+
+	for i := 0; i < n; i++ {
+		go func(i int) {
+			joke, err := joke()
+			if err != nil {
+				errs <- err
+				return
+			}
+			jokes <- fmt.Sprintf("%d: %s\n", i+1, joke)
+		}(i)
+	}
+
+	for i := 0; i < n; i++ {
+		select {
+		case joke := <-jokes:
+			fmt.Println(joke)
+		case err := <-errs:
+			fmt.Printf(err.Error())
+		}
 	}
 }
 
