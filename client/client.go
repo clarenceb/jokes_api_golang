@@ -21,6 +21,7 @@ func main() {
 	}
 }
 
+// Fetch jokes synchronously: one at a time
 func syncJokes(n int) {
 	for i := 0; i < n; i++ {
 		joke, err := joke()
@@ -34,6 +35,7 @@ func syncJokes(n int) {
 	}
 }
 
+// Fetch jokes concurrently: many at a time
 func concurrentJokes(n int) {
 	jokes := make(chan string, n)
 	errs := make(chan error, n)
@@ -59,6 +61,7 @@ func concurrentJokes(n int) {
 	}
 }
 
+// Fetch a single joke from an external HTTP web service
 func joke() (string, error) {
 	resp, err := http.Get("http://localhost:8080/joke")
 
