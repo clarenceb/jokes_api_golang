@@ -12,7 +12,6 @@ The code will only use packages from the [standard library](http://golang.org/pk
 TODO:
 -----
 * Build server
-* Build client
 * Figure out how to write tests (yes, not doing TDD as I don't even know the syntax yet!)
     * Go testing
     * Gingko
@@ -21,25 +20,62 @@ TODO:
 Setup
 -----
 
-Running the Server
-------------------
+Install Go compiler and tools: https://golang.org/doc/install
 
-    cd src/github.com/clarenceb/jokes_api/server
+On Mac OS X, you can use [Homebrew](http://brew.sh/):
+
+    brew install go
+
+Prepare your Go workspace and set your [GOPATH](https://golang.org/doc/code.html#GOPATH):
+
+    $ mkdir -p $HOME/go/{src,pkg,bin}
+    $ export GOPATH=$HOME/go
+    $ echo "export GOPATH=$HOME/go" >> ~/.bashrc
+
+Read more about Go lang [workspaces](https://golang.org/doc/code.html#Workspaces).
+
+Fetch this project into your Go workspace:
+
+    $ cd $GOPATH
+    $ go get github.com/clarenceb/jokes_api_golang
+
+Using the Server
+----------------
+
+    # Build the server
+    cd $GOPATH/src/github.com/clarenceb/jokes_api/server
     go build
+
+    # Run the server (on port localhost:8080)
     ./server
 
     # Test server with curl:
     curl -H "Accept: application/json" http://localhost:8080/joke
     # => {"joke":"Chuck Norris finished World of Warcraft."}
 
-Running the Client
-------------------
+Using the Client
+----------------
 
-    cd src/github.com/clarenceb/jokes_api/client
+    # Build the client
+    cd $GOPATH/src/github.com/clarenceb/jokes_api/client
     go build
+
+    # View usage
     ./client --help
+
+    # Fetch one joke
     ./client
     # => 1: Chuck Norris finished World of Warcraft.
+
+    # Fetch multiple jokes
+    ./client -n 2
+    # => 1: No one has ever spoken during review of Chuck Norris' code and lived to tell about it.
+    # => 2: Chuck Norris once ate four 30lb bowling balls without chewing.
+
+    # Fetch multiple jokes concurrently
+    ./client -n 2
+    # => 2: Chuck Norris once ate four 30lb bowling balls without chewing.
+    # => 1: No one has ever spoken during review of Chuck Norris' code and lived to tell about it.
 
 About `jokes_api/server`
 -----------------------
@@ -49,10 +85,9 @@ Demonstrates:
 * HTTP RESTful API
 * JSON encoding / decoding of messages
 * Basic logging for debugging / troubleshooting
-* Testing
-* Making concurrent HTTP client requests (via goroutines and channels)
 * Packages and splitting code over multiple files
 * Error handling
+* Testing
 
 About `jokes_api/client`
 -----------------------
@@ -61,9 +96,9 @@ Demonstrates:
 
 * Command-line tool
 * Parsing command-line arguments
-* Basic logging for debugging / troubleshooting
-* Testing
 * Making concurrent HTTP client requests (via goroutines and channels)
+* Error handling
+* Testing
 
 Potential Improvements
 ----------------------
@@ -81,6 +116,7 @@ Further Learning
     * https://gobyexample.com/command-line-flags
 * Learn more about JSON encoding and decoding:
     * http://blog.golang.org/json-and-go
+* Per-project GOPATH setup with [direnv](http://tammersaleh.com/posts/manage-your-gopath-with-direnv/)
 
 Credits
 -------
