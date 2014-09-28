@@ -11,11 +11,10 @@ The code will only use packages from the [standard library](http://golang.org/pk
 
 TODO:
 -----
-* Build server
 * Figure out how to write tests (yes, not doing TDD as I don't even know the syntax yet!)
-    * Go testing
-    * Gingko
-    * GoConvery
+    * Go testing package
+    * Gingko - BDD
+    * GoConvery - BDD
 
 Setup
 -----
