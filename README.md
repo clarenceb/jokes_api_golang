@@ -12,7 +12,9 @@ The code will only use packages from the [standard library](http://golang.org/pk
 TODO:
 -----
 * Figure out how to write tests (yes, not doing TDD as I don't even know the syntax yet!)
-    * Go testing package
+    * Go 'testing' package
+    * Go 'net/http/httptest' package
+    * Testify - https://github.com/stretchr/testify
     * Gingko - BDD
     * GoConvery - BDD
 
@@ -116,6 +118,9 @@ Further Learning
 * Learn more about JSON encoding and decoding:
     * http://blog.golang.org/json-and-go
 * Per-project GOPATH setup with [direnv](http://tammersaleh.com/posts/manage-your-gopath-with-direnv/)
+* Go "testing" package:
+    * http://golang.org/pkg/testing/
+    * https://golang.org/doc/code.html#Testing
 
 Credits
 -------
