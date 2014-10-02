@@ -87,7 +87,7 @@ Demonstrates:
 * JSON encoding / decoding of messages
 * Basic logging for debugging / troubleshooting
 * Error handling
-* Testing
+* TODO: Testing
 
 About `jokes_api/client`
 -----------------------
@@ -99,7 +99,7 @@ Demonstrates:
 * Making concurrent HTTP client requests (via goroutines and channels)
 * Error handling
 * Packages and splitting code over multiple files
-* Testing
+* TODO: Testing
 
 Potential Improvements
 ----------------------
