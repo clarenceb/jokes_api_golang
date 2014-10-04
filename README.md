@@ -1,22 +1,13 @@
 Jokes API example in Go lang
 ============================
 
-This is a basic example of a RESTful API which serves jokes from the internet and a client to make requesting jokes easier.
+This is a basic example of a RESTful API which serves jokes from the internet and a commandline client to make requesting jokes easier.
 
 This is my first ever Go program so its probably not going to be idiomatic Go lang and not a good example of a "real life" API.
 
 The main purpose is for me to try out some of the Go concepts I have learnt about in a [Tour of Go](http://tour.golang.org/) and a starting point for a Go lang Dojo at work.
 
 The code will only use packages from the [standard library](http://golang.org/pkg/).
-
-TODO:
------
-* Figure out how to write tests (yes, not doing TDD as I don't even know the syntax yet!)
-    * Go 'testing' package
-    * Go 'net/http/httptest' package
-    * Testify - https://github.com/stretchr/testify
-    * Gingko - BDD
-    * GoConvery - BDD
 
 Setup
 -----
@@ -74,9 +65,15 @@ Using the Client
     # => 2: Chuck Norris once ate four 30lb bowling balls without chewing.
 
     # Fetch multiple jokes concurrently
-    ./client -n 2
+    ./client -n 2 -c
     # => 2: Chuck Norris once ate four 30lb bowling balls without chewing.
     # => 1: No one has ever spoken during review of Chuck Norris' code and lived to tell about it.
+
+    # You can time synchronous vs. concurrent requests like so:
+    time ./client -n 10
+    # => real   0m3.681s
+    time ./client -n 10 -c
+    # => real   0m0.846s
 
 About `jokes_api/server`
 -----------------------
@@ -103,6 +100,11 @@ Demonstrates:
 
 Potential Improvements
 ----------------------
+
+* Add some unit testing with the `testing` package and HTTP testing with `net/http/httptest` package
+* Try a BDD-style framework to describe the API, e.g. [Gingko](http://onsi.github.io/ginkgo/) or [GoConvey](http://goconvey.co/)
+* Add some additional API endpoints (e.g. request specific joke, save/list/retrieve/delete favourite jokes for a user)
+* Add other joke APIs - not just the [Internet Chuck Norris Database](icndb.com/api/)
 
 Further Learning
 ----------------
